@@ -1,0 +1,30 @@
+{
+  "name": "docs-optimbtp",
+  "version": "1.0.0",
+  "description": "Centre de Documentation Optim - Documentation complète pour tous les projets Optim",
+  "homepage": "https://optimbtp.github.io/docs/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/optimbtp/docs.git"
+  },
+  "scripts": {
+    "build": "mkdocs build",
+    "serve": "mkdocs serve",
+    "serve-dev": "mkdocs serve --dev-addr=127.0.0.1:8001",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d site",
+    "clean": "rm -rf site"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.3.0"
+  },
+  "keywords": [
+    "documentation",
+    "mkdocs",
+    "optim",
+    "infrastructure",
+    "kubernetes"
+  ],
+  "author": "Équipe Optim",
+  "license": "MIT"
+}
