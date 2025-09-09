@@ -1,11 +1,11 @@
 site_name: Centre de Documentation Optim
 site_description: "Documentation complète pour tous les projets Optim"
 site_author: "Équipe Optim"
-site_url: "https://docs.optim.com"
+site_url: "https://optimbtp.github.io/docs/"
 
 # Repository
-repo_name: "azer-optim/docs"
-repo_url: "https://github.com/azer-optim/docs"
+repo_name: "optimbtp/docs"
+repo_url: "https://github.com/optimbtp/docs"
 edit_uri: "edit/main/docs/"
 
 # Configuration
