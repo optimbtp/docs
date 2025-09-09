@@ -1,1 +1,90 @@
-site_name: My Docs
+site_name: Centre de Documentation Optim
+site_description: "Documentation complète pour tous les projets Optim"
+site_author: "Équipe Optim"
+site_url: "https://docs.optim.com"
+
+# Repository
+repo_name: "azer-optim/docs"
+repo_url: "https://github.com/azer-optim/docs"
+edit_uri: "edit/main/docs/"
+
+# Configuration
+theme:
+  name: material
+  palette:
+    # Palette toggle for light mode
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Passer en mode sombre
+    # Palette toggle for dark mode
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Passer en mode clair
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.path
+    - navigation.top
+    - search.highlight
+    - search.share
+    - toc.follow
+    - content.code.copy
+    - content.action.edit
+
+# Extensions
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - toc:
+      permalink: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+
+# Plugins
+plugins:
+  - search:
+      lang: fr
+
+# Navigation
+nav:
+  - Accueil: index.md
+  - Projets:
+      - Vue d'ensemble: projects/index.md
+      - Mobile:
+          - Vue d'ensemble: projects/mobile/index.md
+          - Premiers pas: projects/mobile/getting-started.md
+          - Développement: projects/mobile/development.md
+      - Commandes: projects/commands/index.md
+      - SAAS:
+          - Vue d'ensemble: projects/saas/index.md
+          - Premiers pas: projects/saas/getting-started.md
+          - Développement: projects/saas/development.md
+      - Backoffice:
+          - Vue d'ensemble: projects/backoffice/index.md
+          - Premiers pas: projects/backoffice/getting-started.md
+          - Développement: projects/backoffice/development.md
+  - Ressources Partagées:
+      - Standards: shared/standards/index.md
+      - Infrastructure: shared/infrastructure/index.md
+      - Outils: shared/tools/index.md
+  - Modèles: templates/index.md
+
+# Extra
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/azer-optim
+    - icon: fontawesome/brands/docker
+      link: https://hub.docker.com/u/optim
+  generator: false

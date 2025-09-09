@@ -1,0 +1,14 @@
+# MkDocs Requirements
+# Install with: pip install -r requirements.txt
+
+mkdocs>=1.5.0
+mkdocs-material>=9.0.0
+pymdown-extensions>=10.0.0
+mkdocs-git-revision-date-localized-plugin>=1.2.0
+mkdocs-tags>=0.1.0
+
+# Optional extensions for enhanced functionality
+mkdocs-mermaid2-plugin>=0.6.0
+mkdocs-pdf-export-plugin>=0.5.0
+mkdocs-awesome-pages-plugin>=2.8.0
+mkdocs-minify-plugin>=0.7.0
