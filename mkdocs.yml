@@ -61,19 +61,24 @@ nav:
   - Accueil: index.md
   - Projets:
       - Vue d'ensemble: projects/index.md
-      - Mobile:
-          - Vue d'ensemble: projects/mobile/index.md
-          - Premiers pas: projects/mobile/getting-started.md
-          - Développement: projects/mobile/development.md
+
       - Commandes: projects/commands/index.md
-      - SAAS:
-          - Vue d'ensemble: projects/saas/index.md
-          - Premiers pas: projects/saas/getting-started.md
-          - Développement: projects/saas/development.md
+
       - Backoffice:
           - Vue d'ensemble: projects/backoffice/index.md
           - Premiers pas: projects/backoffice/getting-started.md
           - Développement: projects/backoffice/development.md
+
+      - SAAS:
+          - Vue d'ensemble: projects/saas/index.md
+          - Premiers pas: projects/saas/getting-started.md
+          - Développement: projects/saas/development.md
+
+      - Mobile:
+          - Vue d'ensemble: projects/mobile/index.md
+          - Premiers pas: projects/mobile/getting-started.md
+          - Développement: projects/mobile/development.md
+
   - Ressources Partagées:
       - Standards: shared/standards/index.md
       - Infrastructure: shared/infrastructure/index.md

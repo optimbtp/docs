@@ -1,4 +1,4 @@
-# Standards de Développement
+<!-- # Standards de Développement
 
 Cette section présente les standards de codage, les meilleures pratiques et les processus suivis dans tous les projets Optim.
 
@@ -416,4 +416,4 @@ SELECT * FROM users;
 
 ---
 
-_These standards are living documents. Propose changes via pull requests to keep them current and relevant._
+_These standards are living documents. Propose changes via pull requests to keep them current and relevant._ -->

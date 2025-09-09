@@ -1,129 +1,128 @@
-# Commands Project Documentation
+# Documentation du Projet Commands
 
-![Status](https://img.shields.io/badge/Status-Active-green) ![Type](https://img.shields.io/badge/Type-CLI%20Tools-blue)
+![Status](https://img.shields.io/badge/Statut-Actif-green) ![Type](https://img.shields.io/badge/Type-Outils%20CLI-blue)
 
-Welcome to the Commands project documentation. This section covers our command-line utilities and automation tools.
+Bienvenue dans la documentation du projet Commands. Cette section couvre nos utilitaires en ligne de commande et nos outils d'automatisation.
 
-## Overview
+## Aperçu
 
-The Commands project provides a suite of command-line tools designed to streamline development, deployment, and operational tasks across the Optim ecosystem.
+Le projet Commands fournit une suite d'outils en ligne de commande conçus pour rationaliser les tâches de développement, de déploiement et opérationnelles dans l'écosystème Optim.
 
-## Available Commands
+## Commandes Disponibles
 
-### Core Commands
+### Commandes Principales
 
-- **`optim-build`** - Build automation and packaging
-- **`optim-deploy`** - Deployment orchestration
-- **`optim-test`** - Testing utilities and runners
-- **`optim-sync`** - Data synchronization tools
-- **`optim-config`** - Configuration management
+- **`docker build`** - Automatisation de construction et packaging
+- **`docker compose up -d`** - Lancement des conteneurs
+- **`docker compose down`** - Fermeture des conteneurs
 
-### Development Commands
+### Commandes de Développement
 
-- **`optim-dev`** - Development environment setup
-- **`optim-lint`** - Code quality and linting
-- **`optim-format`** - Code formatting utilities
-- **`optim-analyze`** - Code analysis and metrics
+- **`optim-dev`** - Configuration de l'environnement de développement
+- **`optim-lint`** - Qualité de code et linting
+- **`optim-format`** - Utilitaires de formatage de code
+- **`optim-analyze`** - Analyse de code et métriques -->
 
-### Operations Commands
+### Commandes d'Opérations
 
-- **`optim-monitor`** - System monitoring and health checks
-- **`optim-backup`** - Backup and restore utilities
-- **`optim-migrate`** - Database and system migrations
-- **`optim-scale`** - Scaling and load management
+<!--
+- **`optim-monitor`** - Surveillance système et vérifications de santé
+- **`optim-backup`** - Utilitaires de sauvegarde et restauration
+- **`optim-migrate`** - Migrations de base de données et système
+- **`optim-scale`** - Gestion de la mise à l'échelle et des charges -->
 
-## Quick Start
+## Démarrage Rapide
 
 ### Installation
 
-```bash
-# Global installation
+<!-- ```bash
+# Installation globale
 npm install -g @optim/commands
 
-# Project-specific installation
+# Installation spécifique au projet
 npm install --save-dev @optim/commands
-```
+``` -->
 
-### Basic Usage
+### Utilisation de Base
 
 ```bash
-# Display help
+# Afficher l'aide
 optim --help
 
-# Check version
+# Vérifier la version
 optim --version
 
-# Build project
+# Construire le projet
 optim-build --env production
 
-# Run tests
+# Exécuter les tests
 optim-test --coverage
 
-# Deploy application
+# Déployer l'application
 optim-deploy --target staging
 ```
 
-## Command Reference
+## Référence des Commandes
 
-### Build Commands
+### Commandes de Construction
 
 ```bash
-# Build with specific environment
+# Construire avec un environnement spécifique
 optim-build --env [development|staging|production]
 
-# Build with custom configuration
+# Construire avec une configuration personnalisée
 optim-build --config ./custom-build.json
 
-# Build with verbose output
+# Construire avec sortie détaillée
 optim-build --verbose
 
-# Clean build artifacts
+# Nettoyer les artefacts de construction
 optim-build --clean
 ```
 
-### Test Commands
+### Commandes de Test
 
 ```bash
-# Run all tests
+# Exécuter tous les tests
 optim-test
 
-# Run specific test suite
+# Exécuter une suite de tests spécifique
 optim-test --suite unit
 
-# Run with coverage
+# Exécuter avec couverture
 optim-test --coverage
 
-# Run in watch mode
+# Exécuter en mode surveillance
 optim-test --watch
 
-# Generate test report
+# Générer un rapport de test
 optim-test --report html
 ```
 
-### Deployment Commands
+### Commandes de Déploiement
 
 ```bash
-# Deploy to staging
+# Déployer vers staging
 optim-deploy --target staging
 
-# Deploy with rollback capability
+# Déployer avec capacité de rollback
 optim-deploy --target production --enable-rollback
 
-# Dry run deployment
+# Déploiement en mode simulation
 optim-deploy --dry-run
 
-# Deploy specific version
+# Déployer une version spécifique
 optim-deploy --version 1.2.3
 
-# Rollback deployment
+# Effectuer un rollback
 optim-deploy --rollback
 ```
 
 ## Configuration
 
-### Global Configuration
+### Configuration Globale
 
-Create a global configuration file at `~/.optim/config.json`:
+Créer un fichier de configuration globale à `~/.optim/config.json` :
 
 ```json
 {
@@ -143,13 +142,13 @@ Create a global configuration file at `~/.optim/config.json`:
 }
 ```
 
-### Project Configuration
+### Configuration de Projet
 
-Create a project-specific configuration file at `./optim.json`:
+Créer un fichier de configuration spécifique au projet à `./optim.json` :
 
 ```json
 {
-  "name": "my-project",
+  "name": "mon-projet",
   "version": "1.0.0",
   "build": {
     "entry": "./src/index.js",
@@ -169,53 +168,53 @@ Create a project-specific configuration file at `./optim.json`:
 }
 ```
 
-## Advanced Usage
+## Utilisation Avancée
 
-### Custom Scripts
+### Scripts Personnalisés
 
-```bash
-# Create custom command
-optim-config create-command my-custom-command
+<!-- ```bash
+# Créer une commande personnalisée
+optim-config create-command ma-commande-personnalisee
 
-# Run custom script
-optim run my-custom-script
+# Exécuter un script personnalisé
+optim run mon-script-personnalise
 
-# Chain multiple commands
+# Chaîner plusieurs commandes
 optim run "build && test && deploy"
-```
+``` -->
 
-### Environment Variables
+### Variables d'Environnement
 
 ```bash
-# Set environment-specific variables
+# Définir des variables spécifiques à l'environnement
 export OPTIM_ENV=production
-export OPTIM_API_KEY=your-api-key
+export OPTIM_API_KEY=votre-cle-api
 export OPTIM_LOG_LEVEL=debug
 
-# Use in commands
+# Utiliser dans les commandes
 optim-deploy --env $OPTIM_ENV
 ```
 
-### Hooks and Plugins
+### Hooks et Plugins
 
 ```bash
-# Install plugin
+# Installer un plugin
 optim-config install-plugin @optim/eslint-plugin
 
-# Configure hooks
+# Configurer des hooks
 optim-config set-hook pre-commit "optim-lint && optim-test"
 
-# Run hooks manually
+# Exécuter les hooks manuellement
 optim-config run-hook pre-deploy
 ```
 
-## Integration Examples
+## Exemples d'Intégration
 
-### CI/CD Integration
+### Intégration CI/CD
 
 ```yaml
-# GitHub Actions example
-name: Deploy
+# Exemple GitHub Actions
+name: Déployer
 on:
   push:
     branches: [main]
@@ -224,173 +223,173 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Setup Node.js
+      - name: Configurer Node.js
         uses: actions/setup-node@v2
         with:
           node-version: "16"
-      - name: Install dependencies
+      - name: Installer les dépendances
         run: npm ci
-      - name: Install Optim CLI
+      - name: Installer Optim CLI
         run: npm install -g @optim/commands
-      - name: Run tests
+      - name: Exécuter les tests
         run: optim-test --coverage
-      - name: Build application
+      - name: Construire l'application
         run: optim-build --env production
-      - name: Deploy
+      - name: Déployer
         run: optim-deploy --target production
         env:
           OPTIM_API_KEY: ${{ secrets.OPTIM_API_KEY }}
 ```
 
-### Docker Integration
+### Intégration Docker
 
 ```dockerfile
-# Dockerfile example
+# Exemple Dockerfile
 FROM node:16-alpine
 
-# Install Optim CLI
+# Installer Optim CLI
 RUN npm install -g @optim/commands
 
-# Copy project files
+# Copier les fichiers du projet
 COPY . /app
 WORKDIR /app
 
-# Install dependencies
+# Installer les dépendances
 RUN npm ci
 
-# Build application
+# Construire l'application
 RUN optim-build --env production
 
-# Start application
+# Démarrer l'application
 CMD ["optim", "run", "start"]
 ```
 
-## Troubleshooting
+## Dépannage
 
-### Common Issues
+### Problèmes Courants
 
-1. **Command Not Found**
+1. **Commande Introuvable**
 
    ```bash
-   # Ensure global installation
+   # Assurer l'installation globale
    npm install -g @optim/commands
 
-   # Check PATH
+   # Vérifier le PATH
    echo $PATH
    ```
 
-2. **Permission Errors**
+2. **Erreurs de Permission**
 
    ```bash
-   # Use sudo for global installation
+   # Utiliser sudo pour l'installation globale
    sudo npm install -g @optim/commands
 
-   # Or configure npm prefix
+   # Ou configurer le préfixe npm
    npm config set prefix ~/.npm-global
    ```
 
-3. **Build Failures**
+3. **Échecs de Construction**
 
    ```bash
-   # Clean and rebuild
+   # Nettoyer et reconstruire
    optim-build --clean
    optim-build --verbose
 
-   # Check dependencies
+   # Vérifier les dépendances
    npm audit
    ```
 
-### Debug Mode
+### Mode Debug
 
 ```bash
-# Enable debug logging
+# Activer la journalisation de debug
 export DEBUG=optim:*
 optim-build --verbose
 
-# Check configuration
+# Vérifier la configuration
 optim-config show
 
-# Validate environment
+# Valider l'environnement
 optim-config validate
 ```
 
-## Development
+## Développement
 
-### Contributing
+### Contribuer
 
-1. Fork the repository
-2. Create a feature branch
-3. Implement changes with tests
-4. Submit a pull request
+1. Forker le dépôt
+2. Créer une branche de fonctionnalité
+3. Implémenter les changements avec des tests
+4. Soumettre une pull request
 
-### Local Development
+### Développement Local
 
 ```bash
-# Clone repository
+# Cloner le dépôt
 git clone https://github.com/optim/commands.git
 cd commands
 
-# Install dependencies
+# Installer les dépendances
 npm install
 
-# Link for local testing
+# Lier pour les tests locaux
 npm link
 
-# Run tests
+# Exécuter les tests
 npm test
 
-# Build
+# Construire
 npm run build
 ```
 
-### Creating New Commands
+### Créer de Nouvelles Commandes
 
 ```javascript
-// lib/commands/my-command.js
+// lib/commands/ma-commande.js
 const { Command } = require("@optim/commands-core");
 
-class MyCommand extends Command {
+class MaCommande extends Command {
   constructor() {
-    super("my-command", "Description of my command");
+    super("ma-commande", "Description de ma commande");
 
-    this.option("-f, --force", "Force execution");
-    this.option("-o, --output <dir>", "Output directory");
+    this.option("-f, --force", "Forcer l'exécution");
+    this.option("-o, --output <dir>", "Répertoire de sortie");
   }
 
   async execute(options) {
-    // Command implementation
-    console.log("Executing my command with options:", options);
+    // Implémentation de la commande
+    console.log("Exécution de ma commande avec les options:", options);
   }
 }
 
-module.exports = MyCommand;
+module.exports = MaCommande;
 ```
 
-## API Reference
+## Référence API
 
-### Core Classes
+### Classes Principales
 
-- **`Command`** - Base class for all commands
-- **`Config`** - Configuration management
-- **`Logger`** - Logging utilities
-- **`Utils`** - Common utility functions
+- **`Command`** - Classe de base pour toutes les commandes
+- **`Config`** - Gestion de la configuration
+- **`Logger`** - Utilitaires de journalisation
+- **`Utils`** - Fonctions utilitaires communes
 
-### Hooks System
+### Système de Hooks
 
-- **`pre-build`** - Before build execution
-- **`post-build`** - After build completion
-- **`pre-test`** - Before test execution
-- **`post-test`** - After test completion
-- **`pre-deploy`** - Before deployment
-- **`post-deploy`** - After deployment
+- **`pre-build`** - Avant l'exécution de la construction
+- **`post-build`** - Après la completion de la construction
+- **`pre-test`** - Avant l'exécution des tests
+- **`post-test`** - Après la completion des tests
+- **`pre-deploy`** - Avant le déploiement
+- **`post-deploy`** - Après le déploiement
 
-## Resources
+## Ressources
 
-- **[GitHub Repository](https://github.com/optim/commands)**
-- **[API Documentation](api/index.md)**
-- **[Examples Repository](https://github.com/optim/commands-examples)**
-- **[Plugin Registry](plugins/index.md)**
+- **[Dépôt GitHub](https://github.com/optim/commands)**
+- **[Documentation API](api/index.md)**
+- **[Dépôt d'Exemples](https://github.com/optim/commands-examples)**
+- **[Registre de Plugins](plugins/index.md)**
 
 ---
 
-_For questions or support, contact the Tools Team or create an issue in the repository._
+_Pour les questions ou le support, contactez l'Équipe Outils ou créez un ticket dans le dépôt._
