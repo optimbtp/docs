@@ -750,7 +750,7 @@ echo "✅ Rotation du secret terminée"
 
 #### Validation Pré-Déploiement
 
-```bash
+<!-- ```bash
 #!/bin/bash
 # Validation complète avant déploiement
 APP_NAME=${1:-optim-app}
@@ -779,11 +779,11 @@ echo "📊 Vérification des ressources..."
 kubectl top nodes
 
 echo "✅ Validation terminée avec succès"
-```
+``` -->
 
 #### Post-Déploiement Health Check
 
-```bash
+<!-- ```bash
 #!/bin/bash
 # Vérifications post-déploiement
 APP_NAME=${1:-optim-app}
@@ -829,7 +829,753 @@ kubectl get pods -l app=$APP_NAME -n $NAMESPACE
 kubectl top pods -l app=$APP_NAME -n $NAMESPACE
 
 echo "✅ Vérifications post-déploiement terminées"
+``` -->
+
+## Procédures d'Infrastructure et Kubernetes
+
+Cette section contient des guides étape par étape pour les manipulations courantes d'infrastructure et de Kubernetes.
+
+### 🚀 Procédures de Déploiement
+
+#### Déploiement d'une Nouvelle Application
+
+**Prérequis:** Accès kubectl configuré, Helm installé, images Docker prêtes
+
+1. **Préparer l'environnement**
+
+   ```bash
+   # Vérifier la connexion au cluster
+   kubectl cluster-info
+
+   # Vérifier l'espace de noms
+   kubectl get namespaces
+
+   # Créer l'espace de noms si nécessaire
+   kubectl create namespace nouvelle-app
+   ```
+
+2. **Configurer les secrets**
+
+   ```bash
+   # Créer les secrets de base de données
+   kubectl create secret generic db-secret \
+     --from-literal=username=dbuser \
+     --from-literal=password=motdepasse \
+     -n nouvelle-app
+
+   # Créer les secrets API
+   kubectl create secret generic api-secret \
+     --from-literal=api-key=votre-cle-api \
+     -n nouvelle-app
+   ```
+
+3. **Déployer avec Helm**
+
+   ```bash
+   # Ajouter le dépôt Helm
+   helm repo add optim https://charts.optim.com
+   helm repo update
+
+   # Installer l'application
+   helm install nouvelle-app optim/app-chart \
+     --namespace nouvelle-app \
+     --set image.tag=v1.0.0 \
+     --set replicas=3
+   ```
+
+4. **Vérifier le déploiement**
+
+   ```bash
+   # Vérifier les pods
+   kubectl get pods -n nouvelle-app
+
+   # Vérifier les services
+   kubectl get services -n nouvelle-app
+
+   # Vérifier les ingress
+   kubectl get ingress -n nouvelle-app
+   ```
+
+#### Mise à Jour d'Application (Blue-Green)
+
+<!-- 1. **Préparer la nouvelle version**
+
+   ```bash
+   # Étiqueter la version actuelle comme "blue"
+   kubectl label deployment app-deployment version=blue -n production
+
+   # Créer le déploiement "green"
+   kubectl create deployment app-green \
+     --image=optim/app:v2.0.0 \
+     --replicas=3 \
+     -n production
+   ```
+
+2. **Tester la version green**
+
+   ```bash
+   # Port-forward pour tester
+   kubectl port-forward deployment/app-green 8080:3000 -n production
+
+   # Tester l'application sur localhost:8080
+   curl http://localhost:8080/health
+   ```
+
+3. **Basculer le trafic**
+
+   ```bash
+   # Modifier le service pour pointer vers green
+   kubectl patch service app-service \
+     -p '{"spec":{"selector":{"app":"app-green"}}}' \
+     -n production
+   ```
+
+4. **Nettoyer l'ancienne version** -->
+
+<!-- ```bash
+# Une fois validé, supprimer la version blue
+kubectl delete deployment app-deployment -n production
+``` -->
+
+#### Déploiement Optim Factory vers Recette
+
+**Prérequis:**
+
+- Accès au dépôt Git configuré
+- Docker installé et configuré
+- Azure CLI installé et configuré
+- Accès au registry Azure (optimfactoryregistry.azurecr.io)
+- Helm installé
+- Accès au cluster AKS
+
+**Processus complet de déploiement:**
+
+1. **Préparation et Vérification du Code**
+
+   ```bash
+   # Récupérer les dernières modifications du dépôt
+   git pull
+
+   # Vérifier les fichiers modifiés (vue et art)
+   git status
+   git diff
+
+   # Vérifier que tous les fichiers sont bien suivis
+   git add -A
+   ```
+
+2. **Mise à Jour de la Version**
+
+   ```bash
+   # Modifier le numéro de version dans les fichiers de configuration
+   # Exemple: package.json, version.txt, ou fichiers de configuration
+   # Format recommandé: W2024.70.a (Semaine.Numéro.Révision)
+
+   # Vérifier la nouvelle version
+   grep -r "version" package.json
+   ```
+
+3. **Construction des Images Docker**
+
+   ```bash
+   # Construire l'image de l'application FastAPI
+   docker compose build fastapi
+
+   # Construire l'image de l'application principale
+   docker compose build app
+
+   # Vérifier que les images sont créées
+   docker images | grep saas
+   ```
+
+4. **Étiquetage des Images pour Azure Registry**
+
+   ```bash
+   # Étiqueter l'image FastAPI avec la version et timestamp
+   # Format: YYMMDD-HHMM
+   docker tag saas-fastapi optimfactoryregistry.azurecr.io/optim-factory-web-fastapi:250905-1000
+
+   # Étiqueter l'image principale avec la version et timestamp
+   docker tag saas-app optimfactoryregistry.azurecr.io/optim-factory-web-app:250904-1800
+
+   # Vérifier les tags
+   docker images | grep optimfactoryregistry
+   ```
+
+5. **Authentification Azure**
+
+   ```bash
+   # Se connecter à Azure avec le code de périphérique
+   az login --use-device-code
+   # Suivre les instructions affichées et entrer le code sur https://aka.ms/devicelogin
+
+   # Se connecter au registry Azure Container Registry
+   az acr login --name optimfactoryregistry.azurecr.io
+   ```
+
+6. **Publication des Images**
+
+   ```bash
+   # Pousser l'image FastAPI vers le registry
+   docker push optimfactoryregistry.azurecr.io/optim-factory-web-fastapi:250905-1000
+
+   # Pousser l'image principale vers le registry
+   docker push optimfactoryregistry.azurecr.io/optim-factory-web-app:250904-1800
+
+   # Vérifier que les images sont bien poussées
+   az acr repository list --name optimfactoryregistry
+   ```
+
+7. **Configuration Kubernetes**
+
+   ```bash
+   # Récupérer les credentials du cluster AKS
+   az aks get-credentials --resource-group optimfactorykubernetes_group --name optimfactorykubernetes
+   # Confirmer avec 'y' si demandé
+
+   # Vérifier la connexion au cluster
+   kubectl cluster-info
+   kubectl get nodes
+   ```
+
+8. **Déploiement avec Helm (MISE EN LIGNE)**
+
+   ```bash
+   # Naviguer vers le répertoire des charts Helm
+   cd charts
+
+   # Déployer vers l'environnement de recette
+   helm upgrade optimbtp-saas-recette ./ -f ./values-recette.yaml
+
+   # Vérifier le déploiement
+   kubectl get pods -n recette
+   kubectl get services -n recette
+
+   # Retourner au répertoire principal
+   cd ..
+   ```
+
+9. **Validation du Déploiement**
+
+   ```bash
+   # Vérifier le statut des pods
+   kubectl get pods -l app=optimbtp-saas-recette
+
+   # Vérifier les logs si nécessaire
+   kubectl logs -l app=optimbtp-saas-recette --tail=50
+
+   # Tester l'endpoint de santé
+   kubectl port-forward service/optimbtp-saas-recette 8080:80
+   curl http://localhost:8080/health
+   ```
+
+10. **Enregistrement Git (ENREGISTREMENT GIT)**
+
+    ```bash
+    # Ajouter tous les fichiers modifiés
+    git add .
+
+    # Créer un commit avec un message descriptif
+    git commit -m "Mise à jour vers version W2024.70.a"
+
+    # Pousser vers le dépôt principal
+    git push
+    ```
+
+11. **Gestion des Branches de Version**
+
+    ```bash
+    # Récupérer les dernières modifications de origin
+    git fetch origin
+
+    # Basculer vers la branche de développement
+    git checkout dev
+
+    # Créer une nouvelle branche de version
+    git checkout -b "versions/20250904-W2024.70.a"
+
+    # Pousser la nouvelle branche de version
+    git push origin "versions/20250904-W2024.70.a"
+
+    # Récupérer les modifications et retourner à dev
+    git fetch origin
+    git checkout dev
+    ```
+
+**Notes importantes:**
+
+- **Nommage des versions:** Utiliser le format `YYMMDD-HHMM` pour les tags Docker
+- **Branches de version:** Suivre le format `versions/YYYYMMDD-W2024.XX.x`
+- **Environnements:** Cette procédure concerne l'environnement `recette`
+- **Rollback:** En cas de problème, utiliser `helm rollback optimbtp-saas-recette [REVISION]`
+
+**Vérifications post-déploiement:**
+
+```bash
+# Vérifier l'état du déploiement Helm
+helm status optimbtp-saas-recette
+
+# Vérifier les ressources Kubernetes
+kubectl get all -l app=optimbtp-saas-recette
+
+# Vérifier les événements récents
+kubectl get events --sort-by=.metadata.creationTimestamp | tail -10
 ```
+
+### 🔧 Gestion des Clusters Kubernetes
+
+#### Ajout d'un Nouveau Nœud au Cluster
+
+1. **Préparer la machine**
+
+   ```bash
+   # Sur la nouvelle machine
+   # Installer Docker
+   curl -fsSL https://get.docker.com -o get-docker.sh
+   sh get-docker.sh
+
+   # Installer kubeadm, kubelet, kubectl
+   sudo apt-get update && sudo apt-get install -y apt-transport-https curl
+   curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+   echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+   sudo apt-get update && sudo apt-get install -y kubelet kubeadm kubectl
+   ```
+
+2. **Générer le token de join (sur le master)**
+
+   ```bash
+   # Créer un nouveau token
+   kubeadm token create --print-join-command
+   ```
+
+3. **Joindre le nœud au cluster**
+
+   ```bash
+   # Sur la nouvelle machine, exécuter la commande générée
+   sudo kubeadm join <master-ip>:6443 --token <token> --discovery-token-ca-cert-hash <hash>
+   ```
+
+4. **Vérifier l'ajout**
+   ```bash
+   # Sur le master
+   kubectl get nodes
+   kubectl describe node <nouveau-noeud>
+   ```
+
+#### Configuration d'un Ingress Controller
+
+1. **Installer NGINX Ingress**
+
+   ```bash
+   # Ajouter le dépôt Helm
+   helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+   helm repo update
+
+   # Installer l'ingress controller
+   helm install ingress-nginx ingress-nginx/ingress-nginx \
+     --namespace ingress-nginx \
+     --create-namespace \
+     --set controller.replicaCount=2
+   ```
+
+2. **Configurer les certificats SSL**
+
+   ```bash
+   # Installer cert-manager
+   helm repo add jetstack https://charts.jetstack.io
+   helm install cert-manager jetstack/cert-manager \
+     --namespace cert-manager \
+     --create-namespace \
+     --set installCRDs=true
+   ```
+
+3. **Créer un ClusterIssuer**
+
+   ```yaml
+   # cluster-issuer.yml
+   apiVersion: cert-manager.io/v1
+   kind: ClusterIssuer
+   metadata:
+     name: letsencrypt-prod
+   spec:
+     acme:
+       server: https://acme-v02.api.letsencrypt.org/directory
+       email: admin@optim.com
+       privateKeySecretRef:
+         name: letsencrypt-prod
+       solvers:
+         - http01:
+             ingress:
+               class: nginx
+   ```
+
+4. **Appliquer la configuration**
+   ```bash
+   kubectl apply -f cluster-issuer.yml
+   ```
+
+### 💾 Gestion des Bases de Données
+
+#### Sauvegarde Complète de PostgreSQL dans Kubernetes
+
+1. **Créer un Job de sauvegarde**
+
+   ```yaml
+   # backup-job.yml
+   apiVersion: batch/v1
+   kind: Job
+   metadata:
+     name: postgres-backup
+     namespace: database
+   spec:
+     template:
+       spec:
+         containers:
+           - name: postgres-backup
+             image: postgres:13
+             env:
+               - name: PGPASSWORD
+                 valueFrom:
+                   secretKeyRef:
+                     name: postgres-secret
+                     key: password
+             command:
+               - /bin/bash
+               - -c
+               - |
+                 pg_dump -h postgres-service -U postgres -d optim_db | gzip > /backup/$(date +%Y%m%d_%H%M%S).sql.gz
+                 aws s3 cp /backup/*.sql.gz s3://optim-backups/database/
+             volumeMounts:
+               - name: backup-storage
+                 mountPath: /backup
+         volumes:
+           - name: backup-storage
+             emptyDir: {}
+         restartPolicy: Never
+   ```
+
+2. **Exécuter la sauvegarde**
+   ```bash
+   kubectl apply -f backup-job.yml
+   kubectl wait --for=condition=complete job/postgres-backup -n database --timeout=300s
+   kubectl logs job/postgres-backup -n database
+   ```
+
+#### Restauration de Base de Données
+
+1. **Préparer la restauration**
+
+   ```bash
+   # Arrêter l'application
+   kubectl scale deployment app-deployment --replicas=0 -n production
+
+   # Télécharger la sauvegarde
+   aws s3 cp s3://optim-backups/database/20240909_120000.sql.gz /tmp/
+   ```
+
+2. **Créer un Job de restauration**
+
+   ```yaml
+   # restore-job.yml
+   apiVersion: batch/v1
+   kind: Job
+   metadata:
+     name: postgres-restore
+     namespace: database
+   spec:
+     template:
+       spec:
+         containers:
+           - name: postgres-restore
+             image: postgres:13
+             env:
+               - name: PGPASSWORD
+                 valueFrom:
+                   secretKeyRef:
+                     name: postgres-secret
+                     key: password
+             command:
+               - /bin/bash
+               - -c
+               - |
+                 gunzip -c /backup/backup.sql.gz | psql -h postgres-service -U postgres -d optim_db
+             volumeMounts:
+               - name: backup-data
+                 mountPath: /backup
+         volumes:
+           - name: backup-data
+             configMap:
+               name: backup-configmap
+         restartPolicy: Never
+   ```
+
+3. **Redémarrer l'application**
+   ```bash
+   kubectl scale deployment app-deployment --replicas=3 -n production
+   ```
+
+### 🔐 Gestion des Secrets et Sécurité
+
+#### Rotation des Secrets de Base de Données
+
+1. **Générer un nouveau mot de passe**
+
+   ```bash
+   # Générer un mot de passe sécurisé
+   NEW_PASSWORD=$(openssl rand -base64 32)
+   echo "Nouveau mot de passe: $NEW_PASSWORD"
+   ```
+
+2. **Mettre à jour le secret Kubernetes**
+
+   ```bash
+   # Encoder en base64
+   echo -n "$NEW_PASSWORD" | base64
+
+   # Mettre à jour le secret
+   kubectl patch secret postgres-secret \
+     -p '{"data":{"password":"'$(echo -n "$NEW_PASSWORD" | base64)'"}}' \
+     -n database
+   ```
+
+3. **Mettre à jour la base de données**
+
+   ```bash
+   # Se connecter au pod PostgreSQL
+   kubectl exec -it postgres-pod -n database -- bash
+
+   # Dans le pod, changer le mot de passe
+   psql -U postgres -c "ALTER USER optim_user PASSWORD '$NEW_PASSWORD';"
+   ```
+
+4. **Redémarrer les applications**
+   ```bash
+   kubectl rollout restart deployment app-deployment -n production
+   kubectl rollout status deployment app-deployment -n production
+   ```
+
+#### Configuration du RBAC
+
+1. **Créer un ServiceAccount**
+
+   ```yaml
+   # service-account.yml
+   apiVersion: v1
+   kind: ServiceAccount
+   metadata:
+     name: app-service-account
+     namespace: production
+   ```
+
+2. **Créer un Role**
+
+   ```yaml
+   # role.yml
+   apiVersion: rbac.authorization.k8s.io/v1
+   kind: Role
+   metadata:
+     namespace: production
+     name: app-role
+   rules:
+     - apiGroups: [""]
+       resources: ["pods", "services"]
+       verbs: ["get", "list", "watch"]
+     - apiGroups: ["apps"]
+       resources: ["deployments"]
+       verbs: ["get", "list", "watch", "update"]
+   ```
+
+3. **Créer un RoleBinding**
+
+   ```yaml
+   # role-binding.yml
+   apiVersion: rbac.authorization.k8s.io/v1
+   kind: RoleBinding
+   metadata:
+     name: app-role-binding
+     namespace: production
+   subjects:
+     - kind: ServiceAccount
+       name: app-service-account
+       namespace: production
+   roleRef:
+     kind: Role
+     name: app-role
+     apiGroup: rbac.authorization.k8s.io
+   ```
+
+4. **Appliquer les configurations**
+   ```bash
+   kubectl apply -f service-account.yml
+   kubectl apply -f role.yml
+   kubectl apply -f role-binding.yml
+   ```
+
+### 📊 Surveillance et Monitoring
+
+#### Configuration de Prometheus et Grafana
+
+1. **Installer Prometheus avec Helm**
+
+   ```bash
+   helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+   helm repo update
+
+   helm install prometheus prometheus-community/kube-prometheus-stack \
+     --namespace monitoring \
+     --create-namespace \
+     --set grafana.adminPassword=admin123
+   ```
+
+2. **Configurer les ServiceMonitors**
+
+   ```yaml
+   # app-service-monitor.yml
+   apiVersion: monitoring.coreos.com/v1
+   kind: ServiceMonitor
+   metadata:
+     name: app-service-monitor
+     namespace: monitoring
+   spec:
+     selector:
+       matchLabels:
+         app: optim-app
+     endpoints:
+       - port: metrics
+         path: /metrics
+         interval: 30s
+   ```
+
+3. **Créer des alertes personnalisées**
+
+   ```yaml
+   # custom-alerts.yml
+   apiVersion: monitoring.coreos.com/v1
+   kind: PrometheusRule
+   metadata:
+     name: app-alerts
+     namespace: monitoring
+   spec:
+     groups:
+       - name: optim.rules
+         rules:
+           - alert: HighMemoryUsage
+             expr: container_memory_usage_bytes / container_spec_memory_limit_bytes > 0.9
+             for: 5m
+             labels:
+               severity: warning
+             annotations:
+               summary: "Utilisation mémoire élevée détectée"
+   ```
+
+4. **Accéder aux interfaces**
+
+   ```bash
+   # Port-forward Grafana
+   kubectl port-forward svc/prometheus-grafana 3000:80 -n monitoring
+
+   # Port-forward Prometheus
+   kubectl port-forward svc/prometheus-kube-prometheus-prometheus 9090:9090 -n monitoring
+   ```
+
+### 🛠️ Maintenance et Mise à l'Échelle
+
+#### Mise à l'Échelle Automatique (HPA)
+
+1. **Installer Metrics Server**
+
+   ```bash
+   kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+   ```
+
+2. **Créer un HPA**
+
+   ```yaml
+   # hpa.yml
+   apiVersion: autoscaling/v2
+   kind: HorizontalPodAutoscaler
+   metadata:
+     name: app-hpa
+     namespace: production
+   spec:
+     scaleTargetRef:
+       apiVersion: apps/v1
+       kind: Deployment
+       name: app-deployment
+     minReplicas: 3
+     maxReplicas: 20
+     metrics:
+       - type: Resource
+         resource:
+           name: cpu
+           target:
+             type: Utilization
+             averageUtilization: 70
+       - type: Resource
+         resource:
+           name: memory
+           target:
+             type: Utilization
+             averageUtilization: 80
+   ```
+
+3. **Appliquer et vérifier**
+   ```bash
+   kubectl apply -f hpa.yml
+   kubectl get hpa -n production
+   kubectl describe hpa app-hpa -n production
+   ```
+
+#### Nettoyage et Maintenance
+
+1. **Nettoyer les images inutilisées**
+
+   ```bash
+   # Sur chaque nœud
+   docker system prune -a -f
+
+   # Ou utiliser un DaemonSet
+   kubectl create -f - <<EOF
+   apiVersion: apps/v1
+   kind: DaemonSet
+   metadata:
+     name: docker-cleanup
+     namespace: kube-system
+   spec:
+     selector:
+       matchLabels:
+         name: docker-cleanup
+     template:
+       metadata:
+         labels:
+           name: docker-cleanup
+       spec:
+         containers:
+         - name: docker-cleanup
+           image: docker:dind
+           command: ["docker", "system", "prune", "-a", "-f"]
+           volumeMounts:
+           - name: docker-sock
+             mountPath: /var/run/docker.sock
+         volumes:
+         - name: docker-sock
+           hostPath:
+             path: /var/run/docker.sock
+   EOF
+   ```
+
+2. **Nettoyer les ressources Kubernetes**
+
+   ```bash
+   # Supprimer les pods terminés
+   kubectl delete pods --field-selector=status.phase=Succeeded --all-namespaces
+
+   # Supprimer les jobs terminés
+   kubectl delete jobs --field-selector=status.successful=1 --all-namespaces
+
+   # Nettoyer les événements anciens
+   kubectl get events --sort-by=.metadata.creationTimestamp --all-namespaces
+   ```
 
 ## Dépannage
 
