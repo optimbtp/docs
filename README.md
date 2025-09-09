@@ -50,15 +50,6 @@ docs/
 └── mkdocs.yml         # Configuration MkDocs
 ```
 
-## 🎯 Fonctionnalités
-
-- ✅ **Documentation Multi-Projets** - Mobile, SAAS, Backoffice, Commands
-- ✅ **Infrastructure K8s** - Procédures et snippets de code
-- ✅ **Mode Sombre/Clair** - Interface adaptative
-- ✅ **Recherche Intégrée** - Recherche full-text en français
-- ✅ **Navigation Intuitive** - Organisation par onglets
-- ✅ **Responsive Design** - Compatible mobile et desktop
-
 ## 📖 Sections Principales
 
 | Section                                                   | Description                       |
@@ -81,14 +72,6 @@ mkdocs build
 mkdocs gh-deploy
 ```
 
-## 🤝 Contribution
-
-1. **Fork** le dépôt
-2. **Créer** une branche: `git checkout -b feature/nouvelle-doc`
-3. **Commit** vos changements: `git commit -m "Ajout documentation X"`
-4. **Push** vers la branche: `git push origin feature/nouvelle-doc`
-5. **Créer** une Pull Request
-
 ## 📋 Standards de Documentation
 
 - ✅ **Français** comme langue principale
@@ -104,15 +87,3 @@ mkdocs gh-deploy
 mkdocs build
 mkdocs gh-deploy --force
 ```
-
-## 📞 Support
-
-- **Repository:** [azer-optim/docs](https://github.com/azer-optim/docs)
-- **Issues:** [Créer un ticket](https://github.com/azer-optim/docs/issues)
-- **Équipe:** Documentation Optim
-
----
-
-📅 **Dernière mise à jour:** Septembre 2025  
-🏷️ **Version:** 1.0.0  
-👥 **Mainteneurs:** Équipe Optim
