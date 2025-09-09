@@ -1,238 +1,118 @@
-# Documentation Template and Folder Structure Guide
+# 📚 Centre de Documentation Optim
 
-This project now has a comprehensive documentation template and folder structure designed for documenting multiple projects efficiently.
+![MkDocs](https://img.shields.io/badge/MkDocs-Material-blue)
+![Status](https://img.shields.io/badge/Status-Actif-green)
+![Language](https://img.shields.io/badge/Langue-Français-blue)
 
-## 🚀 What's New
+Documentation complète et centralisée pour tous les projets de l'écosystème Optim.
 
-### Complete Folder Structure
+## 🚀 Démarrage Rapide
 
-Your documentation now follows a scalable, organized structure:
+### Prérequis
 
-```
-docs-optimbtp/
-├── mkdocs.yml                          # Enhanced configuration
-├── requirements.txt                    # MkDocs dependencies
-├── DOCUMENTATION_TEMPLATE.md           # This guide
-├── docs/                               # All documentation
-│   ├── index.md                        # Updated homepage
-│   ├── projects/                       # Project-specific docs
-│   │   ├── index.md                    # Projects overview
-│   │   ├── mobile/                     # Mobile project
-│   │   │   ├── index.md               # Project overview
-│   │   │   ├── getting-started.md      # Quick start guide
-│   │   │   ├── development.md          # Developer docs
-│   │   │   └── legacy.md              # Your original content
-│   │   └── commands/                   # Commands project
-│   │       ├── index.md               # Project overview
-│   │       └── legacy.md              # Your original content
-│   ├── shared/                         # Shared resources
-│   │   ├── standards/
-│   │   │   └── index.md               # Development standards
-│   │   ├── infrastructure/
-│   │   │   └── index.md               # Infrastructure docs
-│   │   └── tools/
-│   │       └── index.md               # Development tools
-│   ├── templates/
-│   │   └── index.md                   # Documentation templates
-│   └── assets/                         # Images and downloads
-│       └── images/
-└── overrides/                          # Theme customizations (future)
-```
+- Python 3.8+
+- pip
 
-## 📋 Templates Provided
-
-### 1. **Project Documentation Template**
-
-Complete structure for documenting any project including:
-
-- Project overview with status badges
-- Getting started guides
-- User and developer documentation
-- API documentation structure
-- Deployment guides
-- Troubleshooting sections
-
-### 2. **API Documentation Template**
-
-Comprehensive API documentation including:
-
-- Authentication methods
-- Endpoint documentation
-- Error handling
-- Code examples in multiple languages
-- Rate limiting information
-
-### 3. **Feature Documentation Template**
-
-For documenting individual features:
-
-- User stories and requirements
-- Design and implementation details
-- Testing and acceptance criteria
-- Configuration and monitoring
-
-### 4. **Standard Templates**
-
-- README templates
-- Changelog templates
-- Contributing guides
-- Troubleshooting guides
-
-## 🎯 Benefits of This Structure
-
-### **Scalability**
-
-- Easy to add new projects without restructuring
-- Consistent organization across all projects
-- Clear separation between project-specific and shared documentation
-
-### **Maintainability**
-
-- Standardized templates ensure consistency
-- Shared resources reduce duplication
-- Clear ownership and update responsibilities
-
-### **Discoverability**
-
-- Logical navigation structure
-- Search functionality across all projects
-- Tagged content for easy filtering
-
-### **Professional Quality**
-
-- Modern MkDocs setup with Material theme support
-- Professional documentation standards
-- Comprehensive content examples
-
-## 🛠️ Getting Started
-
-### 1. **View the Documentation**
-
-To run the documentation with the Material theme and dark mode toggle:
-
-**Option 1: Using the provided script**
+### Installation
 
 ```bash
-./serve.sh
+# Cloner le dépôt
+git clone https://github.com/azer-optim/docs.git
+cd docs
+
+# Créer l'environnement virtuel
+python -m venv .venv
+source .venv/bin/activate  # Linux/Mac
+# ou .venv\Scripts\activate  # Windows
+
+# Installer les dépendances
+pip install mkdocs-material
+
+# Lancer le serveur de développement
+mkdocs serve
 ```
 
-**Option 2: Manual activation**
+📖 **Accès:** [http://127.0.0.1:8000](http://127.0.0.1:8000)
+
+## 📁 Structure du Projet
+
+```
+docs/
+├── projects/           # Documentation des projets
+│   ├── mobile/        # Application mobile
+│   ├── saas/          # Plateforme SAAS
+│   ├── backoffice/    # Interface d'administration
+│   └── commands/      # Outils CLI
+├── shared/            # Ressources partagées
+│   ├── infrastructure/ # Documentation infrastructure
+│   ├── standards/     # Standards de développement
+│   └── tools/         # Outils et configuration
+└── mkdocs.yml         # Configuration MkDocs
+```
+
+## 🎯 Fonctionnalités
+
+- ✅ **Documentation Multi-Projets** - Mobile, SAAS, Backoffice, Commands
+- ✅ **Infrastructure K8s** - Procédures et snippets de code
+- ✅ **Mode Sombre/Clair** - Interface adaptative
+- ✅ **Recherche Intégrée** - Recherche full-text en français
+- ✅ **Navigation Intuitive** - Organisation par onglets
+- ✅ **Responsive Design** - Compatible mobile et desktop
+
+## 📖 Sections Principales
+
+| Section                                                   | Description                       |
+| --------------------------------------------------------- | --------------------------------- |
+| **[Projets](docs/projects/index.md)**                     | Documentation des applications    |
+| **[Infrastructure](docs/shared/infrastructure/index.md)** | Kubernetes, Docker, CI/CD         |
+| **[Standards](docs/shared/standards/index.md)**           | Bonnes pratiques de développement |
+| **[Outils](docs/shared/tools/index.md)**                  | Configuration et outillage        |
+
+## 🛠️ Commandes Utiles
 
 ```bash
-# Activate virtual environment
-source .venv/bin/activate
+# Serveur de développement
+mkdocs serve
 
-# Run MkDocs
-mkdocs serve --dev-addr=127.0.0.1:8001
+# Construction statique
+mkdocs build
+
+# Déploiement
+mkdocs gh-deploy
 ```
 
-Your documentation will be available at: http://127.0.0.1:8001/
+## 🤝 Contribution
 
-### 2. **Dark Mode Toggle**
+1. **Fork** le dépôt
+2. **Créer** une branche: `git checkout -b feature/nouvelle-doc`
+3. **Commit** vos changements: `git commit -m "Ajout documentation X"`
+4. **Push** vers la branche: `git push origin feature/nouvelle-doc`
+5. **Créer** une Pull Request
 
-- Look for the **sun/moon icon** in the top-right corner of the header
-- Click to switch between light and dark modes
-- Your preference is automatically saved
+## 📋 Standards de Documentation
 
-### 3. **Install Enhanced Features (Already Done!)**
+- ✅ **Français** comme langue principale
+- ✅ **Format Markdown** pour tous les contenus
+- ✅ **Exemples de code** avec commentaires
+- ✅ **Procédures étape par étape** pour les tâches complexes
+- ✅ **Screenshots** pour les interfaces utilisateur
 
-The Material theme and enhanced features are already installed in the virtual environment.
-If you need to reinstall:
+## 🚀 Déploiement Production
 
 ```bash
-# Activate virtual environment
-source .venv/bin/activate
-
-# Install dependencies
-pip install -r requirements.txt
+# Construction et déploiement
+mkdocs build
+mkdocs gh-deploy --force
 ```
 
-### 4. **Adding New Projects**
+## 📞 Support
 
-To document a new project:
-
-1. Create folder: `docs/projects/your-project-name/`
-2. Copy the project template structure
-3. Update `mkdocs.yml` navigation
-4. Add project to the projects overview
-
-### 4. **Using Templates**
-
-- Browse `docs/templates/index.md` for all available templates
-- Copy and customize templates for your needs
-- Follow the established patterns for consistency
-
-## 📝 Quick Actions
-
-### **Customize for Your Needs**
-
-1. **Update Project Information**: Edit project overviews with your actual project details
-2. **Add Real Content**: Replace template content with your actual documentation
-3. **Configure Theme**: Install Material theme for enhanced appearance
-4. **Add Your Projects**: Use the templates to document additional projects
-
-### **Best Practices**
-
-1. **Follow Templates**: Use provided templates for consistency
-2. **Link Between Docs**: Cross-reference related documentation
-3. **Keep Updated**: Regularly update documentation as projects evolve
-4. **Use Standards**: Follow the development standards outlined in shared resources
-
-## 🎨 Enhanced Features Available
-
-### **With Material Theme** (`pip install mkdocs-material`)
-
-- Dark/light mode toggle
-- Advanced navigation features
-- Code syntax highlighting
-- Mermaid diagram support
-- Enhanced search capabilities
-
-### **Additional Plugins Available**
-
-- **Mermaid**: For diagrams and flowcharts
-- **PDF Export**: Generate PDF versions
-- **Git Integration**: Show last update dates
-- **Tags**: Organize content with tags
-
-## 📖 Documentation Structure Examples
-
-### **Mobile Project** (Ready to Use)
-
-- Complete project overview with architecture diagrams
-- Step-by-step getting started guide
-- Comprehensive development setup
-- Professional presentation
-
-### **Commands Project** (Ready to Use)
-
-- CLI tool documentation with examples
-- Installation and usage instructions
-- Configuration options
-- API reference structure
-
-### **Shared Resources** (Comprehensive)
-
-- **Development Standards**: Coding standards, Git workflow, review process
-- **Infrastructure**: Deployment architecture, monitoring, security
-- **Tools**: Development tools, testing frameworks, CI/CD setup
-
-## 🚀 Next Steps
-
-1. **Explore the Documentation**: Navigate through the new structure
-2. **Customize Content**: Replace template content with your actual information
-3. **Add Your Projects**: Use templates to document additional projects
-4. **Enhance Setup**: Install Material theme and additional plugins
-5. **Train Your Team**: Share this structure with your development team
-
-## 📞 Need Help?
-
-- **Template Questions**: Review `docs/templates/index.md`
-- **MkDocs Issues**: Check MkDocs documentation
-- **Structure Questions**: Refer to this guide or the examples provided
+- **Repository:** [azer-optim/docs](https://github.com/azer-optim/docs)
+- **Issues:** [Créer un ticket](https://github.com/azer-optim/docs/issues)
+- **Équipe:** Documentation Optim
 
 ---
 
-**Your documentation is now ready for professional project documentation! 🎉**
-
-The structure is flexible and can grow with your needs while maintaining consistency and professionalism across all your projects.
+📅 **Dernière mise à jour:** Septembre 2025  
+🏷️ **Version:** 1.0.0  
+👥 **Mainteneurs:** Équipe Optim
