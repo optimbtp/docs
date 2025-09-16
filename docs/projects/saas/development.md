@@ -715,53 +715,18 @@ spec:
 
 ### Logging
 
-```typescript
-// Structured logging
-import winston from "winston";
+Pour la journalisation et la gestion des erreurs, nous utilisons **Sentry** pour capturer et tracker les erreurs côté API (FastAPI) et frontend (React + TypeScript).
 
-export const logger = winston.createLogger({
-  level: process.env.LOG_LEVEL || "info",
-  format: winston.format.combine(
-    winston.format.timestamp(),
-    winston.format.errors({ stack: true }),
-    winston.format.json()
-  ),
-  defaultMeta: {
-    service: "saas-backend",
-    version: process.env.APP_VERSION,
-  },
-  transports: [
-    new winston.transports.Console(),
-    new winston.transports.File({ filename: "logs/error.log", level: "error" }),
-    new winston.transports.File({ filename: "logs/combined.log" }),
-  ],
-});
+📖 **[Consultez le guide complet de journalisation et Sentry](logging.md)**
 
-// Request logging middleware
-export const requestLogger = (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  const start = Date.now();
+Ce guide détaillé couvre :
 
-  res.on("finish", () => {
-    const duration = Date.now() - start;
-
-    logger.info("Request completed", {
-      method: req.method,
-      url: req.url,
-      statusCode: res.statusCode,
-      duration,
-      userAgent: req.get("User-Agent"),
-      tenantId: req.tenant?.id,
-      userId: req.user?.id,
-    });
-  });
-
-  next();
-};
-```
+- Configuration FastAPI avec Sentry SDK
+- Intégration React + TypeScript avec Sentry
+- Upload des sourcemaps et configuration des releases
+- Exemples pratiques et bonnes pratiques
+- Gestion des variables d'environnement
+- Checklist de déploiement
 
 ### Metrics
 

@@ -73,6 +73,7 @@ nav:
           - Vue d'ensemble: projects/saas/index.md
           - Premiers pas: projects/saas/getting-started.md
           - Développement: projects/saas/development.md
+          - Logging: projects/saas/logging.md
 
       - Mobile:
           - Vue d'ensemble: projects/mobile/index.md

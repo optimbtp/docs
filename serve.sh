@@ -3,4 +3,4 @@
 
 cd /home/azer/docs-optimbtp
 source .venv/bin/activate
-mkdocs serve --dev-addr=127.0.0.1:8001
+mkdocs serve --dev-addr=127.0.0.1:8002
