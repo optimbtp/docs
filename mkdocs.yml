@@ -1,7 +1,8 @@
 site_name: Centre de Documentation Optim
 site_description: "Documentation complète pour tous les projets Optim"
 site_author: "Équipe Optim"
-site_url: "https://optimbtp.github.io/docs/"
+# site_url: "https://optimbtp.github.io/docs/"
+site_url: https://support.docs.optimbtp.fr
 
 # Repository
 repo_name: "optimbtp/docs"
