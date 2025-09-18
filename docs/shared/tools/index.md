@@ -619,6 +619,72 @@ Sentry.init({
 });
 ```
 
+### Service Uptime Monitoring
+
+#### UptimeRobot
+
+**UptimeRobot** est notre solution principale pour surveiller la disponibilité de nos services en production. Il surveille en continu nos applications web, API et services backend pour détecter les temps d'arrêt et les problèmes de performance.
+
+**Services Surveillés :**
+
+- **Web App SAAS** - Application frontend React
+- **Web API SAAS** - API backend FastAPI
+- **Backoffice App** - Interface d'administration
+- **Backoffice API** - API de gestion interne
+
+**Fonctionnalités Principales :**
+
+- **Surveillance 24/7** - Vérifications automatiques toutes les 5 minutes
+- **Notifications Instantanées** - Alertes par email/SMS en cas de panne
+- **Statistiques Détaillées** - Historique de disponibilité et temps de réponse
+- **Page de Status Public** - Transparence pour les utilisateurs
+
+**Dashboard de Monitoring :**
+🔗 **[Status Page Optim](https://stats.uptimerobot.com/Oe5A4NnL2J)**
+
+**Configuration des Alertes :**
+
+```yaml
+# Configuration type pour UptimeRobot
+monitors:
+  - name: "SAAS Web App"
+    url: "https://ref.web.optimbtp.fr"
+    type: "HTTP(s)"
+    interval: 300 # 5 minutes
+
+  - name: "SAAS API"
+    url: "https://api.ref.web.optimbtp.fr/docs"
+    type: "HTTP(s)"
+    interval: 300
+
+  - name: "Backoffice App"
+    url: "https://admin.web.optimbtp.fr/login"
+    type: "HTTP(s)"
+    interval: 300
+
+  - name: "Backoffice API"
+    url: "https://api.admin.web.optimbtp.fr/admin"
+    type: "HTTP(s)"
+    interval: 300
+
+alert_contacts:
+  - type: "email"
+    value: "technique@optim-factory.fr"
+```
+
+**Bonnes Pratiques :**
+
+- **Endpoints de Health Check** - Implémenter des endpoints `/health` dédiés
+- **Seuils d'Alerte** - Configurer des alertes après 2 échecs consécutifs
+- **Escalation** - Alertes par email puis SMS si le problème persiste
+- **Maintenance Windows** - Programmer les fenêtres de maintenance pour éviter les fausses alertes
+
+**Intégration avec les Autres Outils :**
+
+- **Slack** - Notifications dans le canal `#alerts`
+- **PagerDuty** - Escalation pour les incidents critiques
+- **Grafana** - Corrélation avec les métriques de performance
+
 ## Code Quality Tools
 
 ### Linting and Formatting
