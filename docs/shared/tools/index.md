@@ -785,7 +785,7 @@ npm run migrate
 # Seed database
 npm run seed
 
-echo "Development environment ready!"
+echo "Development environment ready."
 echo "Run 'npm run dev' to start the application"
 ```
 
